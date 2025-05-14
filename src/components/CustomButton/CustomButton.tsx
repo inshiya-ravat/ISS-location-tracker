@@ -1,24 +1,20 @@
 import { Button } from "@mui/material";
-import type { MapHTMLAttributes } from "react";
-import {
-  BTN_ACTIVE_BG,
-  BTN_INACTIVE_BG,
-  GAP_SM,
-} from "../../Constants/StyleConstants";
+import type { HtmlHTMLAttributes } from "react";
+import { BG, GAP } from "../../Constants/StyleConstants";
 
-interface CustomButtonProps extends MapHTMLAttributes<HTMLButtonElement> {
+interface CustomButtonProps extends HtmlHTMLAttributes<HTMLButtonElement> {
   variant?: "active" | "inactive";
   text: string;
 }
 const CustomButton = ({ variant, text }: CustomButtonProps) => {
   const color = variant
     ? variant === "active"
-      ? BTN_ACTIVE_BG
-      : BTN_INACTIVE_BG
-    : BTN_INACTIVE_BG;
+      ? BG.BTN_ACTIVE
+      : BG.BTN_INACTIVE
+    : BG.BTN_INACTIVE;
   return (
     <Button
-      sx={{ backgroundColor: color, color: "white", marginRight: GAP_SM }}
+      sx={{ backgroundColor: color, color: "white", marginRight: GAP.SM }}
     >
       {text}
     </Button>

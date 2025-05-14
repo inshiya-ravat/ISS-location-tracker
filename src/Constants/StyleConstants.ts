@@ -1,5 +1,13 @@
-export const BTN_ACTIVE_BG = "#4a6d8c";
-export const BTN_INACTIVE_BG = "#3a5b78";
-export const GAP_SM = "10px";
-export const GAP_MD = "20px";
-export const NAV_BG = "#264763";
+export const GAP = {
+  SM: "10px",
+  MD: "20px",
+};
+export const BG = {
+  BTN_INACTIVE: "#3a5b78",
+  BTN_ACTIVE: "#4a6d8c",
+  NAV: "#264763",
+  INTERVAL: "#e6f1f7",
+};
+export const COLOR = {
+  GREY: "#8c8f91",
+};
