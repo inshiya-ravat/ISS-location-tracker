@@ -7,7 +7,9 @@ export const BG = {
   BTN_ACTIVE: "#4a6d8c",
   NAV: "#264763",
   INTERVAL: "#e6f1f7",
+  SECTION: "#f5fbff",
 };
 export const COLOR = {
   GREY: "#8c8f91",
+  GREEN: "#5bcf55",
 };
