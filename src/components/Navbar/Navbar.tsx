@@ -1,18 +1,18 @@
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 import Hamburger from "../../assets/Hamburger.svg";
-import { GAP_MD, GAP_SM, NAV_BG } from "../../Constants/StyleConstants";
+import { GAP, BG } from "../../Constants/StyleConstants";
 
 const Navbar = () => {
   const matches = useMediaQuery("(min-width:500px)");
   return (
     <Box
       sx={{
-        backgroundColor: NAV_BG,
+        backgroundColor: BG.NAV,
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: `${GAP_SM} ${GAP_MD}`,
+        padding: `${GAP.SM} ${GAP.MD}`,
       }}
     >
       <Typography variant="h6">ISS Location Tracker</Typography>
