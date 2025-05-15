@@ -1,14 +1,20 @@
 import ContentSection from "./ContentSection";
 import Section from "./Section";
 
-const Velocity = () => {
+interface VelocityProp {
+  parameters: {
+    velocity: string;
+    units: string;
+  };
+}
+const Velocity = ({ parameters }: VelocityProp) => {
   return (
     <Section heading="VELOCITY">
       <ContentSection
-        mainHeading="27,594 km/h"
+        mainHeading={`${parameters.velocity} km/h`}
         caption="7.66 m/s"
         footerHeading="Units:"
-        footerValue="kilometers"
+        footerValue={parameters.units}
       />
     </Section>
   );

@@ -1,14 +1,19 @@
 import ContentSection from "./ContentSection";
 import Section from "./Section";
 
-const DistanceFromYou = () => {
+interface DistanceFromYouProp {
+  parameters: {
+    footprints: string;
+  };
+}
+const DistanceFromYou = ({ parameters }: DistanceFromYouProp) => {
   return (
     <Section heading="DISTANCE FROM YOU">
       <ContentSection
         mainHeading="2,437 km"
         caption="Based on your current location."
         footerHeading="Footprint"
-        footerValue="4,516,55 km"
+        footerValue={`${parameters.footprints} km`}
       />
     </Section>
   );

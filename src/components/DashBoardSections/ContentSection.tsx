@@ -19,7 +19,7 @@ const ContentSection = ({
         margin: "auto 0",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
+        justifyContent: "space-evenly",
         height: "100%",
       }}
     >
