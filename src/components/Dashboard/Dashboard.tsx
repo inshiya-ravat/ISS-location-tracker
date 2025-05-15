@@ -6,46 +6,17 @@ import DistanceFromYou from "../DashBoardSections/DistanceFromYou";
 import Velocity from "../DashBoardSections/Velocity";
 import SolarPosition from "../DashBoardSections/SolarPosition";
 import Timestamp from "../DashBoardSections/Timestamp";
-import { useEffect, useState } from "react";
-import { getISSInfo } from "../../util/getISSInfo";
+import { useEffect } from "react";
 import ErrorMessage from "../Error/ErrorMEssage";
+import type { Param } from "../../App";
 
-const initialAllParam = {
-  id: "loading...",
-  currentPosition: {
-    latitude: "loading...",
-    longitude: "loading...",
-    altitude: "loading...",
-    visibility: "loading...",
-  },
-  distance: {
-    footprints: "loading...",
-  },
-  velocity: {
-    velocity: "loading...",
-    units: "loading...",
-  },
-  solar: {
-    solar_lat: "loading...",
-    solar_lon: "loading...",
-    daynum: "loading...",
-  },
-};
 interface DashboardProp {
-  updateLastUpdated: () => void;
+  refreshPage: () => Promise<void>;
+  error: string | null;
+  param: Param;
 }
-const Dashboard = ({ updateLastUpdated }: DashboardProp) => {
-  const [error, setError] = useState<string | null>(null);
-  const [param, setParam] = useState(initialAllParam);
-  async function refreshPage() {
-    try {
-      const data = await getISSInfo();
-      setParam(data);
-      updateLastUpdated();
-    } catch (error) {
-      setError(error.message);
-    }
-  }
+
+const Dashboard = ({ refreshPage, error, param }: DashboardProp) => {
   useEffect(() => {
     async function seperatePramas() {
       await refreshPage();

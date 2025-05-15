@@ -23,7 +23,9 @@ const Timestamp = () => {
         const data = await peopleInSpace();
         setPeopleInISS(data);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        }
       }
     }
     seperatePramas();
