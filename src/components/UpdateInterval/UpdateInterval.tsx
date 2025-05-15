@@ -25,17 +25,13 @@ const UpdateInterval = ({
   const intervalRef = useRef<HTMLInputElement>(null);
   const intervalId = useRef<number>(null);
   function addInterval() {
-    console.log(intervalRef.current?.value);
-    console.log("Fsdhfbj");
     if (intervalRef.current) {
-      console.log(intervalRef.current.value);
       if (intervalId.current) {
         clearInterval(intervalId.current);
       }
       if (intervalRef.current.value) {
         intervalId.current = setInterval(
           async () => {
-            console.log("called");
             const data = await getISSInfo();
             updateParam(data);
             updateLastUpdated();
