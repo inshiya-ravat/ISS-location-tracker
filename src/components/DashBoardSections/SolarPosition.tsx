@@ -1,27 +1,35 @@
-import type { ParamType } from "./CurrentPosition";
+import { Table, TableBody, TableCell, TableRow } from "@mui/material";
 import Section from "./Section";
-import TabularSections from "./TabularSections";
+import { COLOR } from "../../Constants/StyleConstants";
 
-const parameters: ParamType[] = [
-  {
-    id: "Solar Latitude",
-    value: "N/A",
-  },
-  {
-    id: "Solar Logitude",
-    value: "N/A",
-  },
-  {
-    id: "Day Number",
-    value: "N/A",
-  },
-];
-const CurrentPosition = () => {
+export interface SolarProp {
+  parameters: {
+    solar_lat: string;
+    solar_lon: string;
+    daynum: string;
+  };
+}
+const SolarPosition = ({ parameters }: SolarProp) => {
   return (
     <Section heading="SOLAR POSITION">
-      <TabularSections parameters={parameters} />
+      <Table>
+        <TableBody>
+          <TableRow>
+            <TableCell sx={{ color: COLOR.GREY }}>Solar Latitude:</TableCell>
+            <TableCell>{parameters.solar_lat}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell sx={{ color: COLOR.GREY }}>Solar Longitude:</TableCell>
+            <TableCell>{parameters.solar_lon}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell sx={{ color: COLOR.GREY }}>Day Number:</TableCell>
+            <TableCell>{parameters.daynum}</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
     </Section>
   );
 };
 
-export default CurrentPosition;
+export default SolarPosition;

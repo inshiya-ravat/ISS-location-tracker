@@ -8,7 +8,10 @@ import {
 import CustomButton from "../CustomButton/CustomButton";
 import { BG, COLOR, GAP } from "../../Constants/StyleConstants";
 
-const UpdateInterval = () => {
+interface UpdateIntervalProp {
+  lastUpdate: number;
+}
+const UpdateInterval = ({ lastUpdate }: UpdateIntervalProp) => {
   const smScreen = useMediaQuery("(min-width:460px)");
   return (
     <Paper
@@ -30,7 +33,7 @@ const UpdateInterval = () => {
         <CustomButton text="Apply" />
       </Box>
       <Typography sx={{ color: COLOR.GREY }}>
-        Last updated: 2 seconds ago
+        Last updated: {(Date.now() - lastUpdate) / 1000} seconds ago
       </Typography>
     </Paper>
   );
