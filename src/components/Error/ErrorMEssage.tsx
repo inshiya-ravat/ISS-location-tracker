@@ -6,8 +6,10 @@ interface ErrorProp {
 const ErrorMessage = ({ error }: ErrorProp) => {
   return (
     <Box sx={{ color: "red" }}>
-      <Typography variant="h4">Oops! We are facing some Error.</Typography>
-      <Typography variant="subtitle1">{error}</Typography>
+      <Typography variant="subtitle1">
+        Oops! We are facing some Error.
+      </Typography>
+      <Typography variant="subtitle2">{error}</Typography>
     </Box>
   );
 };

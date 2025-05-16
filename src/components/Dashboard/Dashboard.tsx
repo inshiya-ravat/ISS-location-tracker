@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Typography } from "@mui/material";
+import { Box, Button, Paper, Skeleton, Typography } from "@mui/material";
 import { COLOR, GAP } from "../../Constants/StyleConstants";
 import SpaceLogo from "../../assets/Space.svg";
 import CurrentPosition from "../DashBoardSections/CurrentPosition";
@@ -14,15 +14,16 @@ interface DashboardProp {
   refreshPage: () => Promise<void>;
   error: string | null;
   param: Param;
+  isLoading: boolean;
 }
 
-const Dashboard = ({ refreshPage, error, param }: DashboardProp) => {
+const Dashboard = ({ refreshPage, error, param, isLoading }: DashboardProp) => {
   useEffect(() => {
     async function seperatePramas() {
       await refreshPage();
     }
     seperatePramas();
-  }, []);
+  }, [refreshPage]);
   if (error) {
     return <ErrorMessage error={error} />;
   }
@@ -45,19 +46,37 @@ const Dashboard = ({ refreshPage, error, param }: DashboardProp) => {
           {" "}
           INTERNATIONAL SPACE STATION
         </Typography>
-        <Typography variant="caption" sx={{ color: COLOR.GREY }}>
-          ID: {param.id}
-        </Typography>
-        <Box sx={{ display: "flex", flexWrap: "wrap", gap: GAP.MD }}>
-          <CurrentPosition parameters={param.currentPosition} />
-          <DistanceFromYou parameters={param.distance} />
-          <Velocity parameters={param.velocity} />
-          <SolarPosition parameters={param.solar} />
+        {isLoading ? (
+          <Skeleton
+            variant="text"
+            animation="wave"
+            sx={{ fontSize: "1rem", width: "150px", margin: "auto" }}
+          />
+        ) : (
+          <Typography variant="caption" sx={{ color: COLOR.GREY }}>
+            ID: {param.id}
+          </Typography>
+        )}
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: GAP.MD,
+          }}
+        >
+          <CurrentPosition
+            isLoading={isLoading}
+            parameters={param.currentPosition}
+          />
+          <DistanceFromYou isLoading={isLoading} parameters={param.distance} />
+          <Velocity isLoading={isLoading} parameters={param.velocity} />
+          <SolarPosition isLoading={isLoading} parameters={param.solar} />
           <Timestamp />
         </Box>
       </Box>
       <Button
-        onClick={async () => await refreshPage()}
+        onClick={refreshPage}
         sx={{ backgroundColor: COLOR.GREEN, color: "white" }}
       >
         Refresh Now
