@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableRow } from "@mui/material";
+import { Skeleton, Table, TableBody, TableCell, TableRow } from "@mui/material";
 import Section from "./Section";
 import { COLOR } from "../../Constants/StyleConstants";
 import { useEffect, useState } from "react";
@@ -16,24 +16,29 @@ function getCreatedAt() {
 
 const Timestamp = () => {
   const [error, setError] = useState<string | null>(null);
-  const [peopleInISS, setPeopleInISS] = useState<number | string>("Loading...");
+  const [peopleInISS, setPeopleInISS] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     async function seperatePramas() {
       try {
+        setIsLoading(true);
         const data = await peopleInSpace();
-        setPeopleInISS(data);
+        setIsLoading(false);
+        if (data) {
+          setPeopleInISS(data);
+        }
       } catch (error) {
         if (error instanceof Error) {
           setError(error.message);
         }
+      } finally {
+        setIsLoading(false);
       }
     }
     seperatePramas();
   }, []);
 
-  if (error) {
-    return <ErrorMessage error={error} />;
-  }
   return (
     <Section heading="TIMESTAMP INFORMATION">
       <Table>
@@ -48,7 +53,19 @@ const Timestamp = () => {
           </TableRow>
           <TableRow>
             <TableCell sx={{ color: COLOR.GREY }}>Day Number:</TableCell>
-            <TableCell>{peopleInISS}</TableCell>
+            <TableCell>
+              {isLoading ? (
+                <Skeleton
+                  variant="text"
+                  sx={{ fontSize: "1rem", width: "50px" }}
+                  animation="wave"
+                />
+              ) : error ? (
+                <ErrorMessage error={error} />
+              ) : (
+                peopleInISS
+              )}
+            </TableCell>
           </TableRow>
         </TableBody>
       </Table>

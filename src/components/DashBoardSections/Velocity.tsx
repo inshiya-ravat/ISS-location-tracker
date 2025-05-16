@@ -6,15 +6,17 @@ interface VelocityProp {
     velocity: string;
     units: string;
   };
+  isLoading: boolean;
 }
-const Velocity = ({ parameters }: VelocityProp) => {
+const Velocity = ({ parameters, isLoading }: VelocityProp) => {
   return (
     <Section heading="VELOCITY">
       <ContentSection
         mainHeading={`${parameters.velocity} km/h`}
-        caption="7.66 m/s"
-        footerHeading="Units:"
+        caption="velocity of the ISS"
+        footerHeading="Units"
         footerValue={parameters.units}
+        isLoading={isLoading}
       />
     </Section>
   );
