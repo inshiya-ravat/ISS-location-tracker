@@ -20,9 +20,6 @@ export async function getDistanceFromLatLonInKm(lat1: number, lon1: number) {
   const R = 6371; // Radius of the earth in km
   const answer = await getUserLocation()
     .then((location) => {
-      console.log(
-        `Latitude: ${location.latitude}, Longitude: ${location.longitude}`,
-      );
       const lat2 = location.latitude;
       const lon2 = location.longitude;
       const dLat = deg2rad(lat2 - lat1); // deg2rad below
@@ -35,11 +32,9 @@ export async function getDistanceFromLatLonInKm(lat1: number, lon1: number) {
           Math.sin(dLon / 2);
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       const d = R * c; // Distance in km
-      console.log("distance:", d);
       return d.toFixed(4);
     })
     .catch((error) => {
-      console.error(error.message);
       throw new Error(error.message);
     });
   return answer;
