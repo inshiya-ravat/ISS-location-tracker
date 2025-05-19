@@ -6,9 +6,11 @@ import DistanceFromYou from "../DashBoardSections/DistanceFromYou";
 import Velocity from "../DashBoardSections/Velocity";
 import SolarPosition from "../DashBoardSections/SolarPosition";
 import Timestamp from "../DashBoardSections/Timestamp";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ErrorMessage from "../Error/ErrorMEssage";
 import type { Param } from "../../App";
+import { getDistanceFromLatLonInKm } from "../../util/getDistance";
+import { toast } from "react-toastify";
 
 interface DashboardProp {
   refreshPage: () => Promise<void>;
@@ -18,15 +20,23 @@ interface DashboardProp {
 }
 
 const Dashboard = ({ refreshPage, error, param, isLoading }: DashboardProp) => {
+  const [distance, setDistance] = useState<string>("");
   useEffect(() => {
     async function seperatePramas() {
       await refreshPage();
+      getDistanceFromLatLonInKm(
+        Number(param.currentPosition.latitude),
+        Number(param.currentPosition.longitude),
+      )
+        .then((result) => setDistance(result))
+        .catch((err) => toast.error(err));
     }
     seperatePramas();
   }, [refreshPage]);
   if (error) {
     return <ErrorMessage error={error} />;
   }
+
   return (
     <Paper
       sx={{
@@ -69,7 +79,11 @@ const Dashboard = ({ refreshPage, error, param, isLoading }: DashboardProp) => {
             isLoading={isLoading}
             parameters={param.currentPosition}
           />
-          <DistanceFromYou isLoading={isLoading} parameters={param.distance} />
+          <DistanceFromYou
+            isLoading={isLoading}
+            parameters={param.distance}
+            distance={distance}
+          />
           <Velocity isLoading={isLoading} parameters={param.velocity} />
           <SolarPosition isLoading={isLoading} parameters={param.solar} />
           <Timestamp />

@@ -6,12 +6,18 @@ interface DistanceFromYouProp {
     footprints: string;
   };
   isLoading: boolean;
+  distance: string;
 }
-const DistanceFromYou = ({ parameters, isLoading }: DistanceFromYouProp) => {
+
+const DistanceFromYou = ({
+  parameters,
+  isLoading,
+  distance,
+}: DistanceFromYouProp) => {
   return (
     <Section heading="DISTANCE FROM YOU">
       <ContentSection
-        mainHeading="2,437 km"
+        mainHeading={distance.toString()}
         caption="Based on your current location."
         footerHeading="Footprint"
         footerValue={`${parameters.footprints} km`}
