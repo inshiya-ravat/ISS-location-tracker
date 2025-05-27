@@ -3,7 +3,7 @@ import Section from "./Section";
 import { COLOR } from "../../Constants/StyleConstants";
 import { useEffect, useState } from "react";
 import { peopleInSpace } from "../../util/peopleInSpace";
-import ErrorMessage from "../Error/ErrorMEssage";
+import ErrorMessage from "../Error/ErrorMessage";
 function getCreatedAt() {
   const now = new Date();
   const currentTime = now.toLocaleString("en-US", {
