@@ -7,7 +7,7 @@ import Velocity from "../DashBoardSections/Velocity";
 import SolarPosition from "../DashBoardSections/SolarPosition";
 import Timestamp from "../DashBoardSections/Timestamp";
 import { useEffect, useState } from "react";
-import ErrorMessage from "../Error/ErrorMEssage";
+import ErrorMessage from "../Error/ErrorMessage";
 import type { Param } from "../../App";
 import { getDistanceFromLatLonInKm } from "../../util/getDistance";
 import { toast } from "react-toastify";

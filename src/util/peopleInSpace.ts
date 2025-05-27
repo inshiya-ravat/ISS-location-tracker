@@ -8,13 +8,10 @@ export async function peopleInSpace() {
     const response = await fetch(`${PeopleInSpaceAPI}/astros.json`);
     if (response.ok) {
       const data = await response.json();
-      let peopleInISS = 0;
-      data.people.map((person: PersonInfo) => {
-        if (person.craft === "ISS") {
-          peopleInISS++;
-        }
-      });
-      return peopleInISS;
+      const peopleInISS = data.people.filter(
+        (person: PersonInfo) => person.craft === "ISS",
+      );
+      return peopleInISS.length;
     } else {
       throw new Error(
         "Failed to fetch people in space. Please try again later.",
